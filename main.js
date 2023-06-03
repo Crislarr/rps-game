@@ -21,7 +21,8 @@ function playRound() {
   let tieMessage = "it's a tie!";
 
   if (playerChoice === computerChoice) {
-    return tieMessage;
+    console.log(tieMessage);
+    return "tie";
   } else if (playerChoice === "rock") {
     if (computerChoice === "scissors") {
       console.log(winMessage);
@@ -51,24 +52,32 @@ function playRound() {
   }
 }
 
-// function game() {
-//   let computerScore = 0;
-//   let playerScore = 0;
+function game() {
+  let computerScore = 0;
+  let playerScore = 0;
 
-//   for (i = 0; i < 5; i++) {
-//     let roundResult = playRound();
-//     if (roundResult === "win") {
-//       playerScore++;
-//     }
-//     if (roundResult === "lose") {
-//       computerScore++;
-//     }
-//     if (computerScore === 3) {
-//       return "You lost the game!";
-//     }
-//     if (playerScore === 3) {
-//       return "You won the game!";
-//     }
-//   }
-// }
-// game();
+  for (i = 0; i < 5; i++) {
+    let roundResult = playRound();
+    if (roundResult === "win") {
+      playerScore++;
+    }
+    if (roundResult === "lose") {
+      computerScore++;
+    }
+    if (computerScore === 3) {
+      return "You lost the game!";
+    }
+    if (playerScore === 3) {
+      return "You won the game!";
+    }
+  }
+
+  if (computerScore > playerScore) {
+    return "You lost the game!";
+  } else if (playerScore > computerScore) {
+    return "You won the game!";
+  } else if (computerScore === playerScore) {
+    return "It's a tie after all!";
+  }
+}
+console.log(game());
