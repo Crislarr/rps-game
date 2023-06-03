@@ -14,25 +14,37 @@ function playRound() {
 
   let computerChoice = getComputerChoice();
 
+  let winMessage = `You won! ${playerChoice} beats ${computerChoice}`;
+
+  let loseMessage = `You lost! ${computerChoice} beats ${playerChoice}`;
+
+  let tieMessage = "it's a tie!";
+
   if (playerChoice === computerChoice) {
-    return "it's a tie!";
+    return tieMessage;
   } else if (playerChoice === "rock") {
     if (computerChoice === "scissors") {
-      return `You won! ${playerChoice} beats ${computerChoice}`;
+      console.log(winMessage);
+      return "win";
     } else if (computerChoice === "paper") {
-      return `You lost! ${computerChoice} beats ${playerChoice}`;
+      console.log(loseMessage);
+      return "lose";
     }
   } else if (playerChoice === "paper") {
     if (computerChoice === "rock") {
-      return `You won! ${playerChoice} beats ${computerChoice}`;
+      console.log(winMessage);
+      return "win";
     } else if (computerChoice === "scissors") {
-      return `You lost! ${computerChoice} beats ${playerChoice}`;
+      console.log(loseMessage);
+      return "lose";
     }
   } else if (playerChoice === "scissors") {
     if (computerChoice === "paper") {
-      return `You won! ${playerChoice} beats ${computerChoice}`;
+      rconsole.log(winMessage);
+      return "win";
     } else if (computerChoice === "rock") {
-      return `You lost! ${computerChoice} beats ${playerChoice}`;
+      console.log(loseMessage);
+      return "lose";
     }
   } else {
     return "Please choose a valid option";
@@ -44,10 +56,17 @@ function playRound() {
 //   let playerScore = 0;
 
 //   for (i = 0; i < 5; i++) {
-//     if (console.log(playRound()) === )
+//     let roundResult = playRound();
+//     if (roundResult === "win") {
+//       playerScore++;
+//     }
+//     if (roundResult === "lose") {
+//       computerScore++;
+//     }
 //     if (computerScore === 3) {
 //       return "You lost the game!";
-//     } else if (playerScore === 3) {
+//     }
+//     if (playerScore === 3) {
 //       return "You won the game!";
 //     }
 //   }
