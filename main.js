@@ -11,13 +11,9 @@ function getComputerChoice() {
 
 function playRound() {
   let playerChoice = prompt("Rock, paper or scissors?").toLowerCase();
-
   let computerChoice = getComputerChoice();
-
   let winMessage = `You won! ${playerChoice} beats ${computerChoice}`;
-
   let loseMessage = `You lost! ${computerChoice} beats ${playerChoice}`;
-
   let tieMessage = "it's a tie!";
 
   if (playerChoice === computerChoice) {
