@@ -1,33 +1,35 @@
-console.log(game());
+function game() {
+  let computerScore = 0;
+  let playerScore = 0;
 
-// function game() {
-//   let computerScore = 0;
-//   let playerScore = 0;
+  for (i = 0; i < 5; i++) {
+    let roundResult = playRound();
 
-//   for (i = 0; i < 5; i++) {
-//     let roundResult = playRound();
-//     if (roundResult === "win") {
-//       playerScore++;
-//     }
-//     if (roundResult === "lose") {
-//       computerScore++;
-//     }
-//     if (computerScore === 3) {
-//       return "You lost the game!";
-//     }
-//     if (playerScore === 3) {
-//       return "You won the game!";
-//     }
-//   }
+    if (roundResult === "invalid option") {
+      i--;
+    }
+    if (roundResult === "win") {
+      playerScore++;
+    }
+    if (roundResult === "lose") {
+      computerScore++;
+    }
+    if (computerScore === 3) {
+      return "You lost the game!";
+    }
+    if (playerScore === 3) {
+      return "You won the game!";
+    }
+  }
 
-//   if (computerScore > playerScore) {
-//     return "You lost the game!";
-//   } else if (playerScore > computerScore) {
-//     return "You won the game!";
-//   } else if (computerScore === playerScore) {
-//     return "It's a tie after all!";
-//   }
-// }
+  if (computerScore > playerScore) {
+    return "You lost the game!";
+  } else if (playerScore > computerScore) {
+    return "You won the game!";
+  } else if (computerScore === playerScore) {
+    return "It's a tie after all!";
+  }
+}
 
 function playRound() {
   let playerChoice = prompt("Rock, paper or scissors?").toLowerCase();
@@ -90,3 +92,5 @@ function chooseResultMessage(gameResult, playerChoice, computerChoice) {
     return invalidMessage;
   }
 }
+
+console.log(game());
