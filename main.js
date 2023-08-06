@@ -30,14 +30,20 @@
 //     return "It's a tie after all!";
 //   }
 // }
+let playerScore = 0;
+let computerScore = 0;
 
-const buttons = document.querySelectorAll(".button");
+const $rpsButtons = document.querySelectorAll(".rps-button");
 
-const $rockButton = document.querySelector("#rock");
-const $paperButton = document.querySelector("#paper");
-const $scissorsButton = document.querySelector("#scissors");
+const roundResultDiv = document.querySelector("#round-result");
 
-buttons.forEach((button) => {
+const restartButton = document.querySelector("#button-start-again");
+
+const gameScoreDiv = document.querySelector("#current-game-score");
+
+const gameResultDiv = document.querySelector("#game-result");
+
+$rpsButtons.forEach((button) => {
   button.addEventListener("click", () => {
     playRound(button.id);
   });
@@ -47,8 +53,23 @@ function playRound(playerChoosenButton) {
   let playerChoice = playerChoosenButton;
   let computerChoice = getComputerChoice();
   let roundResult = compareChoices(playerChoice, computerChoice);
+  if (roundResult === "win") {
+    playerScore++;
+  }
+  if (roundResult === "lose") {
+    computerScore++;
+  }
   displayRoundResult(roundResult, playerChoice, computerChoice);
-  console.log(chooseResultMessage(roundResult, playerChoice, computerChoice));
+  displayCurrentGameScore();
+
+  if (computerScore >= 5) {
+    endCurrentGame();
+    return;
+  }
+  if (playerScore >= 5) {
+    endCurrentGame();
+    return;
+  }
 }
 
 function getComputerChoice() {
@@ -106,8 +127,7 @@ function chooseResultMessage(gameResult, playerChoice, computerChoice) {
 }
 
 function displayRoundResult(roundResult, playerChoice, computerChoice) {
-  const roundResultDiv = document.querySelector("#round-result");
-  roundResultDiv.innerHTML = "";
+  roundResultDiv.innerText = "";
 
   let resultMessage = document.createElement("p");
   resultMessage.innerText = chooseResultMessage(
@@ -115,7 +135,37 @@ function displayRoundResult(roundResult, playerChoice, computerChoice) {
     playerChoice,
     computerChoice
   );
-
   roundResultDiv.appendChild(resultMessage);
 }
-// console.log(game());
+
+function displayCurrentGameScore() {
+  gameScoreDiv.innerText = `current score: you ${playerScore} - ${computerScore} computer`;
+}
+
+function endCurrentGame() {
+  if (playerScore === 5) {
+    gameResultDiv.innerText = `You won the game!`;
+  }
+
+  if (computerScore === 5) {
+    gameResultDiv.innerText = `the computer won the game!`;
+  }
+
+  restartButton.classList = "";
+
+  const playerChoicesDiv = document.querySelector("#playerChoicesDiv");
+
+  playerChoicesDiv.classList = "hidden";
+
+  gameScoreDiv.innerText = `final score: you ${playerScore} - ${computerScore} computer`;
+}
+
+restartButton.addEventListener("click", () => {
+  roundResultDiv.innerText = "";
+  gameScoreDiv.innerText = "you 0 - 0 computer";
+  playerChoicesDiv.classList = "";
+  gameResultDiv.innerText = "";
+  playerScore = 0;
+  computerScore = 0;
+  restartButton.classList.add("hidden");
+});
